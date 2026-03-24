@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danilo Vieira | Process Engineering & Automation Consulting</title>
+    <meta name="description" content="Specialized consulting in Process Engineering, task automation, Internal Tools (Low-Code), and management Dashboards for operational optimization.">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           1. VARIABLES & RESET
+           ========================================= */
+        :root {
+            --bg-color: #0b1120; 
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-light: #94a3b8;
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --accent: #10b981;
+            --border-color: #334155;
+            --sp-sm: 8px; --sp-md: 16px; --sp-lg: 32px; --sp-xl: 64px; --sp-xxl: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; text-decoration: none; list-style: none; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+        /* Scroll Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .section-title { font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: var(--sp-xl); letter-spacing: -1px; }
+        .section-title span { color: var(--primary); }
+        .section-subtitle { text-align: center; color: var(--text-light); margin-top: -40px; margin-bottom: var(--sp-xl); font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;}
+        
+        .tag { background: rgba(59, 130, 246, 0.1); color: #bfdbfe; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+        /* =========================================
+           2. HEADER
+           ========================================= */
+        header {
+            display: flex; justify-content: space-between; align-items: center; padding: var(--sp-md) 5%;
+            background-color: rgba(11, 17, 32, 0.85); position: fixed; width: 100%; top: 0; z-index: 1000;
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+        }
+        .logo { font-weight: 800; font-size: 24px; color: var(--text-main); letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        nav { display: flex; gap: var(--sp-lg); }
+        nav a { color: var(--text-main); font-weight: 600; font-size: 14px; transition: color 0.3s; }
+        nav a:hover { color: var(--primary); }
+
+        /* =========================================
+           3. HERO SECTION
+           ========================================= */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; padding: 100px 10% 0 10%;
+            background: radial-gradient(circle at center, #1e293b 0%, #0b1120 100%);
+        }
+        .hero-layout { display: flex; align-items: center; gap: var(--sp-xl); width: 100%; max-width: 1400px; margin: 0 auto; }
+        
+        .foto-container img {
+            width: 220px; height: 220px; border-radius: 50%; border: 6px solid var(--card-bg);
+            object-fit: cover; box-shadow: 0 0 50px rgba(59, 130, 246, 0.2); transition: transform 0.3s;
+        }
+        .foto-container img:hover { transform: scale(1.03); }
+
+        .hero-text h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: var(--sp-sm); letter-spacing: -2px; }
+        .hero-text h2 { font-size: 1.25rem; font-weight: 400; color: var(--text-light); margin-bottom: var(--sp-lg); max-width: 650px; line-height: 1.6;}
+        
+        .btn-contact {
+            padding: 16px 32px; background-color: var(--primary); color: white; font-weight: 700; border-radius: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;
+            transition: all 0.2s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+        .btn-contact:hover { background-color: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.6); }
+
+        /* =========================================
+           4. ROI CALCULATOR
+           ========================================= */
+        .roi-section { padding: var(--sp-xxl) 10%; background: #0f172a; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .roi-container { max-width: 900px; margin: 0 auto; background: var(--card-bg); border-radius: 16px; padding: var(--sp-xl); border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.3); text-align: center; }
+        .roi-container h3 { font-size: 2rem; margin-bottom: 10px; color: var(--text-main); }
+        .roi-container p { color: var(--text-light); margin-bottom: 30px; line-height: 1.6;}
+        
+        input[type=range] { -webkit-appearance: none; width: 100%; max-width: 500px; background: transparent; margin: 20px 0; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; margin-top: -10px; box-shadow: 0 0 10px rgba(59, 130, 246, 0.8); }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; background: #334155; border-radius: 5px; }
+        
+        .roi-results { display: flex; justify-content: space-around; margin-top: 40px; flex-wrap: wrap; gap: 20px; }
+        .roi-card { flex: 1; min-width: 200px; background: rgba(11, 17, 32, 0.5); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .roi-card h4 { color: var(--text-light); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        .roi-card .valor { font-size: 2.5rem; font-weight: 800; color: var(--accent); }
+        .roi-card .valor.horas { color: var(--primary); }
+
+        /* =========================================
+           5. EXPERTISE (SERVICES)
+           ========================================= */
+        .expertise-section { padding: var(--sp-xxl) 10%; background: var(--bg-color); }
+        .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1400px; margin: 0 auto; }
+        
+        .service-card {
+            background: var(--card-bg); padding: 40px 30px; border-radius: 16px; border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.4); }
+        
+        .service-icon {
+            width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1); color: var(--primary);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 32px; margin-bottom: 20px; border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .service-card h4 { font-size: 1.25rem; color: var(--text-main); margin-bottom: 15px; font-weight: 700; }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+
+        /* =========================================
+           6. CASES SECTION
+           ========================================= */
+        .projects { padding: var(--sp-xxl) 10%; max-width: 1600px; margin: 0 auto; background: #0f172a; border-top: 1px solid var(--border-color);}
+        .case-study { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--sp-xl); background-color: var(--card-bg); padding: var(--sp-xl); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.4); align-items: start; }
+        
+        .project-text h3 { font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: var(--sp-sm); letter-spacing: -1px;}
+        .project-text .subtitle { color: var(--primary); font-size: 1rem; font-weight: 600; margin-bottom: var(--sp-md); display: block; }
+        .tags { display: flex; flex-wrap: wrap; gap: var(--sp-sm); margin-bottom: var(--sp-lg); border-bottom: 1px solid var(--border-color); padding-bottom: var(--sp-md); }
+        
+        .content-block { margin-bottom: var(--sp-lg); }
+        .content-block h4 { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: var(--sp-sm); display: flex; align-items: center; gap: 10px; }
+        .content-block p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: var(--sp-md); text-align: justify; }
+        
+        .feature-list { padding-left: var(--sp-md); }
+        .feature-list li { color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px; position: relative; line-height: 1.6; }
+        .feature-list li::before { content: "→"; color: var(--primary); position: absolute; left: -22px; font-weight: bold; }
+        .feature-list strong { color: var(--text-main); font-weight: 600; }
+
+        .project-visuals { display: flex; flex-direction: column; gap: var(--sp-lg); position: sticky; top: var(--sp-xxl); }
+        
+        .browser-mockup { background: #161e2e; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .browser-header { height: 30px; background: #2a3b55; padding: 0 10px; display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--border-color); }
+        .browser-header .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot.red { background: #ef4444; } .dot.yellow { background: #f59e0b; } .dot.green { background: #10b981; }
+        .browser-content img { width: 100%; height: auto; display: block; }
+        .image-caption { color: var(--text-light); font-size: 11px; font-weight: 500; text-align: center; padding: 10px; background: #161e2e; text-transform: uppercase; letter-spacing: 1px;}
+
+        .phone-mockup { width: 260px; margin: 0 auto; background: #000; border-radius: 30px; padding: 10px; border: 4px solid #334155; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; }
+        .phone-mockup::before { content: ""; position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 100px; height: 18px; background: #000; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; z-index: 10; }
+        .phone-content { border-radius: 20px; overflow: hidden; }
+        .phone-content img { width: 100%; height: auto; display: block; }
+
+        /* =========================================
+           7. FLOATING WHATSAPP
+           ========================================= */
+        .whatsapp-btn {
+            position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 2000;
+            transition: transform 0.3s; text-decoration: none;
+        }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+        @keyframes pulse-wa { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        .whatsapp-btn { animation: pulse-wa 2s infinite; }
+
+        /* =========================================
+           8. RESPONSIVENESS
+           ========================================= */
+        @media (max-width: 1100px) {
+            .case-study { grid-template-columns: 1fr; gap: var(--sp-lg); }
+            .project-visuals { position: static; width: 100%; }
+        }
+        @media (max-width: 768px) {
+            html { font-size: 14px; }
+            header { flex-direction: column; gap: 10px; padding: var(--sp-md); }
+            nav { gap: var(--sp-md); }
+            .hero { padding: 120px 5% 40px 5%; text-align: center; }
+            .hero-layout { flex-direction: column; gap: var(--sp-md); }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text h2 { margin: 0 auto var(--sp-lg) auto; }
+            .projects, .roi-section, .expertise-section { padding: var(--sp-xl) 5%; }
+            .case-study, .roi-container { padding: var(--sp-md); }
+            .project-text h3 { font-size: 1.8rem; }
+            .browser-mockup, .phone-mockup { width: 100%; max-width: 100%; }
+            .phone-mockup { width: 220px; }
+            .whatsapp-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 24px; }
+        }
+
+        /* =========================================
+           FOOTER (CENTERED)
+           ========================================= */
+        footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--sp-lg) 20px;
+            background-color: #080d1a;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto; 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Danilo<span>Vieira</span></div>
+        <nav>
+            <a href="#inicio">Home</a>
+            <a href="#expertise">Solutions</a>
+            <a href="#cases">Case Studies</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-layout reveal">
+            <div class="foto-container">
+                <img src="imagens/foto-perfil.png" alt="Danilo Vieira" loading="lazy">
+            </div>
+            <div class="hero-text">
+                <h1>Process Engineering & Automation.</h1>
+                <h2>Specialized consulting in building intelligent internal tools, robust automations, and high-impact dashboards for operational efficiency.</h2>
+                <a href="#expertise" class="btn-contact">
+                    <i class="material-icons">bolt</i> VIEW MY SOLUTIONS
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="roi" class="roi-section">
+        <div class="roi-container reveal">
+            <h3>How much is inefficiency costing you?</h3>
+            <p>Simulate the savings generated by replacing manual paperwork and chat messages with a fully automated system.</p>
+            
+            <label for="entregas-slider" style="font-weight: 600; color: var(--text-main); font-size: 1.2rem;">
+                Volume: <span id="vol-display" style="color: var(--primary);">1500</span> records/month
+            </label>
+            <br>
+            <input type="range" id="entregas-slider" min="100" max="5000" step="50" value="1500" oninput="calcularROI()">
+
+            <div class="roi-results">
+                <div class="roi-card">
+                    <h4>Time Saved (Administrative)</h4>
+                    <div class="valor horas"><span id="res-horas">75</span>h /mo</div>
+                </div>
+                <div class="roi-card">
+                    <h4>Estimated Savings (Rework & Paper)</h4>
+                    <div class="valor">$<span id="res-dinheiro">3,750</span></div>
+                </div>
+            </div>
+            <p style="font-size: 11px; margin-top: 20px; color: #64748b;">*Based on an average of 3 minutes saved per digitized record and $2.50 in operational costs per manual error/loss.</p>
+        </div>
+    </section>
+
+    <section id="expertise" class="expertise-section">
+        <h2 class="section-title reveal">Core <span>Expertise</span></h2>
+        <p class="section-subtitle reveal">How I turn operational bottlenecks into highly efficient and scalable processes.</p>
+        
+        <div class="service-grid">
+            
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="material-icons">cloud_done</i></div>
+                <h4>Advanced Google Workspace</h4>
+                <p>Extract the most out of the infrastructure you already pay for. Development of robust solutions using Google Sheets as an agile database, Google Drive for file management, and Apps Script for serverless business logic.</p>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="material-icons">api</i></div>
+                <h4>Integrations & Automation</h4>
+                <p>Building smart bridges between systems. Automating repetitive tasks like WhatsApp/SMS alerts, dynamic PDF generation, email triggers, and native API connections so your software stack works together seamlessly.</p>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="material-icons">app_shortcut</i></div>
+                <h4>Custom Internal Tools</h4>
+                <p>Development focused on field and factory operations. Creating mobile apps using Low-Code platforms like AppSheet for offline data collection, QR code scanning, and digital signatures, deployed in record time.</p>
+            </div>
+
+            <div class="service-card reveal">
+                <div class="service-icon"><i class="material-icons">query_stats</i></div>
+                <h4>Dashboards & Analytics</h4>
+                <p>No more static spreadsheets. Building custom, interactive Web Control Towers using HTML/JS. Transforming raw data into visual metrics and real-time KPIs focused on executive decision-making.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="cases" class="projects">
+        <h2 class="section-title reveal">Featured <span>Case Study</span></h2>
+
+        <div class="case-study reveal">
+            <div class="project-text">
+                <h3>Tamar Cargo Logistics TMS</h3>
+                <span class="subtitle">Proof of Delivery (POD) Module & Control Tower</span>
+                
+                <div class="tags">
+                    <span class="tag">Google AppSheet</span>
+                    <span class="tag">Apps Script (JS)</span>
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">SQL Logic</span>
+                    <span class="tag">Dashboard UX</span>
+                </div>
+
+                <div class="content-block">
+                    <h4><i class="material-icons" style="color: #ef4444;">report_problem</i> The Challenge</h4>
+                    <p>The carrier faced a critical issue with reverse logistics. Delayed physical delivery receipts caused data blackouts, preventing immediate client billing. Additionally, managing a mixed fleet required collecting data from third-party drivers without exposing the company's client base or strategic routes.</p>
+                </div>
+
+                <div class="content-block">
+                    <h4><i class="material-icons" style="color: var(--primary);">psychology</i> Solution Architecture</h4>
+                    <p>I developed a serverless ecosystem based on Google Workspace and GitHub Pages. The solution focuses not just on data collection, but on process intelligence:</p>
+                    <ul class="feature-list">
+                        <li><strong>Security by Segmentation:</strong> Implemented Security Filters and Slices in AppSheet. In-house drivers have authenticated access, while third parties use a secure, public "Satellite App" restricted to data submission only.</li>
+                        <li><strong>Rules Engine (Apps Script):</strong> Developed a JavaScript backend that instantly processes incoming images, renames files to a standard format, and dynamically organizes them in Google Drive folders by `Client > Year > Month`.</li>
+                        <li><strong>Web Control Tower (Advanced UX):</strong> Developed an exclusive frontend in pure JS and CSS3. The web dashboard consumes Google Sheets data, offering a fast management interface with smart pagination and native Dark Mode.</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h4><i class="material-icons" style="color: var(--accent);">check_circle</i> Operational & Financial Impact</h4>
+                    <p>The deployment transformed company dynamics. Digital receipts reach the office seconds after delivery, allowing the finance team to accelerate billing by days. Management gained a macro view of fleet productivity via interactive dashboards, eliminating reliance on manual Excel reports.</p>
+                </div>
+            </div>
+
+            <div class="project-visuals">
+                <div class="browser-mockup reveal">
+                    <div class="browser-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div class="browser-content">
+                        <img src="imagens/dash-main-dark.png" alt="Tamar Cargo Main Dashboard" loading="lazy">
+                    </div>
+                    <div class="image-caption">Control Tower: Management View and Productivity KPIs</div>
+                </div>
+
+                <div class="phone-mockup reveal">
+                    <div class="phone-content">
+                        <img src="imagens/print-app.jpg" alt="AppSheet Driver Interface" loading="lazy">
+                    </div>
+                </div>
+                <div class="image-caption" style="margin-top: -15px;">Mobile Interface: Proof of Delivery (POD)</div>
+
+                <div class="browser-mockup reveal">
+                    <div class="browser-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    </div>
+                    <div class="browser-content">
+                        <img src="imagens/dash-zoom-dark.png" alt="Interactive Receipt Viewer" loading="lazy">
+                    </div>
+                    <div class="image-caption">Interactive Viewer: Mathematical Zoom and Mouse-guided Pan</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5511957959557?text=Hi%20Danilo!%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20talk%20about%20a%20project." target="_blank" class="whatsapp-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 Danilo Vieira | Process Engineering & Automation</p>
+    </footer>
+
+    <script>
+        // ROI Calculator Logic
+        function calcularROI() {
+            const volume = document.getElementById('entregas-slider').value;
+            document.getElementById('vol-display').innerText = parseInt(volume).toLocaleString('en-US');
+            
+            // Premise: 3 minutes (0.05 hours) saved per manual entry / $2.50 savings per avoided error
+            const horasSalvas = Math.round(volume * 0.05);
+            const dinheiroSalvo = Math.round(volume * 2.5);
+
+            document.getElementById('res-horas').innerText = horasSalvas;
+            document.getElementById('res-dinheiro').innerText = dinheiroSalvo.toLocaleString('en-US');
+        }
+
+        // Scroll Reveal Animation
+        function revealOnScroll() {
+            var reveals = document.querySelectorAll(".reveal");
+            var windowHeight = window.innerHeight;
+            
+            reveals.forEach(function(reveal) {
+                var elementTop = reveal.getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add("active");
+                }
+            });
+        }
+        
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+    </script>
+</body>
+</html>
